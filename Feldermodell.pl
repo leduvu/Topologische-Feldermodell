@@ -193,7 +193,7 @@ mittelfeld(mittelfeld / [NPBaum,Adv,PPBaum],agr(3,_Numerus,Kasus)) -->
 
 % PP --> P NP
 pp([PBaum,NPBaum]) -->
-	p(PBaum,[regiert(Kasus)]),		% Der Kasus der Präposition muss mit dem der NP Ÿbereinstimmen.
+	p(PBaum,[regiert(Kasus)]),		% Der Kasus der Präposition muss mit dem der NP übereinstimmen.
 	np(NPBaum,agr(_,_,Kasus)).
 
 % NP --> Art N
@@ -320,7 +320,7 @@ nomen(polizistinnen,kng(_,pl,fem)).
 nomen(programmiererin,kng(_,sg,fem)).
 nomen(programmiererinnen,kng(_,pl,fem)).
 
-% GebŠude
+% Gebäude
 nomen(schule,kng(_,sg,fem)).
 nomen(schulen,kng(_,pl,fem)).
 

@@ -38,17 +38,17 @@ parse(Satz,Baumliste) :-
 % S -> NP VP
 % Ein Satz kann in NP und VP aufgeteilt werden.
 % Genauso gut kann man einen Satz in Vorfeld und Linke Satzklammer aufteilen,
-% denn sobald die VP mit dem Verb beginnt, fängt auch die linke Satzklammer an.
+% denn sobald die VP mit dem Verb beginnt, f√§ngt auch die linke Satzklammer an.
 % Alles vor der VP ist die NP und alles vor der Linkensatzklammer ist das Vorfeld.
 %---------------------------------
 
 satz(s / [NPBaum,VBaum]) -->
-	vorfeld(NPBaum,agr(Person,Numerus,nom)),	% NP und VP müssen kongruent sein in Person und Numerus.
+	vorfeld(NPBaum,agr(Person,Numerus,nom)),	% NP und VP m√ºssen kongruent sein in Person und Numerus.
 	lk1(VBaum,fin(Person,Numerus,_,_)).
 
 
 %---------------------------------
-% Da nicht die komplette VP zur linken Satzklammer gehört,
+% Da nicht die komplette VP zur linken Satzklammer geh√∂rt,
 % muss alles, was nach dem Verb kommt als Mittelfeld bezeichnet werden.
 % Satz -> Vorfeld LK Mittelfed
 % S --> NP VP
@@ -62,7 +62,7 @@ satz(s / [NPBaum,VBaum]) -->
 %---------------------------------
 % Linke Satzklammer
 % VP --> V
-% Ein intransitives Verb gehört zur linken Satzklammer.
+% Ein intransitives Verb geh≈°rt zur linken Satzklammer.
 %---------------------------------
 
 lk1(lk / [VBaum],Merkmale) -->
@@ -71,17 +71,17 @@ lk1(lk / [VBaum],Merkmale) -->
 %---------------------------------
 % Linke Satzklammer + Mittelfeld
 % VP --> V NP
-% Ein Transitives Verb fordert eine NP und diese NP gehört zum Mittelfeld.
+% Ein Transitives Verb fordert eine NP und diese NP geh√∂rt zum Mittelfeld.
 %---------------------------------
 
 lk_mittelfeld(lk /[VBaum,NPBaum],Merkmale) -->
 	v(VBaum,Merkmale,[regiert(Kasus)]),	% Der Kasus von Verb und der NP, die im Mittelfeld
-	mittelfeld(NPBaum,agr(_,_,Kasus)).	% steht, müssen gleich sein.
+	mittelfeld(NPBaum,agr(_,_,Kasus)).	% steht, m√ºssen gleich sein.
 
 %---------------------------------
 %---------------------------------
 % VORFELD
-% Im Vorfeld können viele verschiedene Wortarten stehen.
+% Im Vorfeld k≈°nnen viele verschiedene Wortarten stehen.
 %---------------------------------
 %---------------------------------
 % Vorfeld = N
@@ -89,7 +89,7 @@ lk_mittelfeld(lk /[VBaum,NPBaum],Merkmale) -->
 %---------------------------------
 
 vorfeld(vorfeld / [NBaum],agr(3,pl,Kasus)) -->
-	n(NBaum,kng(Kasus,pl,_)).			% Nomen ohne Artikel müssen im Plural stehen.
+	n(NBaum,kng(Kasus,pl,_)).			% Nomen ohne Artikel m√ºssen im Plural stehen.
 
 %---------------------------------
 % Vorfeld = EN
@@ -105,7 +105,7 @@ vorfeld(vorfeld / [ENBaum], agr(3,sg,Kasus)) -->
 %---------------------------------
 
 vorfeld(vorfeld/[ArtBaum,NBaum],agr(3,Numerus,Kasus)) -->
-	art(ArtBaum,KNG),					% Artikel und Nomen müssen kongruent sein in Kasus und Numerus.
+	art(ArtBaum,KNG),					% Artikel und Nomen m≈∏ssen kongruent sein in Kasus und Numerus.
 	n(NBaum,KNG),	  
 	{ KNG = kng(Kasus,Numerus,_) }.
 	
@@ -115,7 +115,7 @@ vorfeld(vorfeld/[ArtBaum,NBaum],agr(3,Numerus,Kasus)) -->
 %---------------------------------
 
 vorfeld(vorfeld / [ArtBaum,NBaum,PPBaum],agr(3,Numerus,Kasus)) -->
-	art(ArtBaum,KNG),					% Artikel und Nomen müssen kongruent sein in Kasus und Numerus.
+	art(ArtBaum,KNG),					% Artikel und Nomen m√ºssen kongruent sein in Kasus und Numerus.
 	n(NBaum,KNG),
 	pp(PPBaum), 
 	{ KNG = kng(Kasus,Numerus,_) }.
@@ -123,7 +123,7 @@ vorfeld(vorfeld / [ArtBaum,NBaum,PPBaum],agr(3,Numerus,Kasus)) -->
 %---------------------------------
 %---------------------------------
 % MITTELFELD
-% Im Mittelfeld können auch viele verschiedene Wortarten stehen.
+% Im Mittelfeld k√∂nnen auch viele verschiedene Wortarten stehen.
 %---------------------------------
 %---------------------------------
 % Mittelfeld = N
@@ -131,7 +131,7 @@ vorfeld(vorfeld / [ArtBaum,NBaum,PPBaum],agr(3,Numerus,Kasus)) -->
 %---------------------------------
 
 mittelfeld(mittelfeld / [NBaum],agr(3,pl,Kasus)) -->
-	n(NBaum,kng(Kasus,pl,_)).				% Nomen ohne Artikel müssen im Plural stehen.
+	n(NBaum,kng(Kasus,pl,_)).				% Nomen ohne Artikel m√ºssen im Plural stehen.
 	
 %---------------------------------
 % Mittelfeld = EN
@@ -146,7 +146,7 @@ mittelfeld(mittelfeld / [ENBaum], agr(3,sg,Kasus)) -->
 %---------------------------------
 
 mittelfeld(mittelfeld/[ArtBaum,NBaum],agr(3,Numerus,Kasus)) -->
-	art(ArtBaum,KNG),						% Artikel und Nomen müssen kongruent sein in Kasus und Numerus.
+	art(ArtBaum,KNG),						% Artikel und Nomen m√ºssen kongruent sein in Kasus und Numerus.
 	n(NBaum,KNG),	  
 	{ KNG = kng(Kasus,Numerus,_) }.
 
@@ -156,7 +156,7 @@ mittelfeld(mittelfeld/[ArtBaum,NBaum],agr(3,Numerus,Kasus)) -->
 %---------------------------------
 
 mittelfeld(mittelfeld / [PPBaum,ArtBaum,NBaum],agr(3,Numerus,Kasus)) -->
-	art(ArtBaum,KNG),						% Artikel und Nomen müssen kongruent sein in Kasus und Numerus.
+	art(ArtBaum,KNG),						% Artikel und Nomen m√ºssen kongruent sein in Kasus und Numerus.
 	n(NBaum,KNG),
 	pp(PPBaum), 
 	{ KNG = kng(Kasus,Numerus,_) }.
@@ -187,18 +187,18 @@ mittelfeld(mittelfeld / [NPBaum,Adv,PPBaum],agr(3,_Numerus,Kasus)) -->
 	pp(PPBaum).
 
 %---------------------------------
-% Definition der Präpositionalphrase im Vorfeld und im Mittelfeld.
+% Definition der Pr√§positionalphrase im Vorfeld und im Mittelfeld.
 % Die PP braucht zur Definition auch die Definition der NP.
 %---------------------------------
 
 % PP --> P NP
 pp([PBaum,NPBaum]) -->
-	p(PBaum,[regiert(Kasus)]),		% Der Kasus der Präposition muss mit dem der NP übereinstimmen.
+	p(PBaum,[regiert(Kasus)]),		% Der Kasus der Pr√§position muss mit dem der NP ≈∏bereinstimmen.
 	np(NPBaum,agr(_,_,Kasus)).
 
 % NP --> Art N
 np([ArtBaum,NBaum],agr(3,Numerus,Kasus)) -->
-	art(ArtBaum,KNG),				% Artikel und Nomen müssen die selben KNG Merkmale haben.
+	art(ArtBaum,KNG),				% Artikel und Nomen m√ºssen die selben KNG Merkmale haben.
 	n(NBaum,KNG),	  
 	{ KNG = kng(Kasus,Numerus,_) }.
 
@@ -272,7 +272,7 @@ artikel(einen,kng(akk,sg,mask)).
 % Nomen
 %----------------------------------
 
-% Gegenstände
+% Gegenst≈†nde
 nomen(stuhl,kng(Kasus,sg,mask)) :- member(Kasus,[nom,akk,dat]).
 nomen(stuhl,kng(gen,sg,mask)).
 nomen(stuehle,kng(Kasus,pl,mask)) :- member(Kasus,[nom,akk,gen]).
@@ -320,7 +320,7 @@ nomen(polizistinnen,kng(_,pl,fem)).
 nomen(programmiererin,kng(_,sg,fem)).
 nomen(programmiererinnen,kng(_,pl,fem)).
 
-% Gebäude
+% Geb≈†ude
 nomen(schule,kng(_,sg,fem)).
 nomen(schulen,kng(_,pl,fem)).
 
@@ -478,7 +478,7 @@ adv(adv/[-dennoch])  --> [dennoch].
 adv(adv/[-naemlich]) --> [naemlich].
 
 %----------------------------------
-% Präpositionen
+% Pr≈†positionen
 %----------------------------------
 
 praeposition(mit,[regiert(dat)]).
@@ -508,7 +508,7 @@ eigenname(marias,gen).
 eigenname(leo,Kasus) :- member(Kasus,[nom,akk,dat]).
 eigenname(leos,gen).
 
-% Städte
+% St≈†dte
 
 eigenname(berlin,Kasus) :- member(Kasus,[nom,akk,dat]).
 eigenname(berlins,gen).
@@ -519,7 +519,7 @@ eigenname(hamburgs,gen).
 eigenname(paris,Kasus) :- member(Kasus,[nom,akk,dat]).
 eigenname(parises,gen).
 
-% Länder
+% L≈†nder
 eigenname(deutschland,Kasus) :- member(Kasus,[nom,akk,dat]).
 eigenname(deutschlands,gen).
 
@@ -529,7 +529,7 @@ eigenname(freankreichs,gen).
 eigenname(vietnam,Kasus) :- member(Kasus,[nom,akk,dat]).
 eigenname(vietnams,gen).
 
-% Perönlichkeiten
+% Per≈°nlichkeiten
 
 eigenname('angela merkel',Kasus) :- member(Kasus,[nom,akk,dat]).
 eigenname('angela merkels',gen).
@@ -557,8 +557,8 @@ konj(konj/[-weshalb]) 	--> [weshalb].
 %----------------------------------
 
 
-% Die rechte Satzklammer entsteht durch Verben, die von einander abhängig sind, bzw. zusammengesetzten
-% Verben. Die Beziehungen wären so ähnlich wie bei Det und N, egal was dazwischen steht, das kann nur in
+% Die rechte Satzklammer entsteht durch Verben, die von einander abh≈†ngig sind, bzw. zusammengesetzten
+% Verben. Die Beziehungen w≈†ren so ≈†hnlich wie bei Det und N, egal was dazwischen steht, das kann nur in
 % Verbindung mit einem Neutrum stehen.
 
 % ? parse([john,sieht,das,heute,buch],D),write(D),nl,fail.
@@ -567,7 +567,7 @@ konj(konj/[-weshalb]) 	--> [weshalb].
 
 %----------------------------------
 % leider kam ich nicht mehr dazu die Regel komplett umzuformen.
-% Zudem fehlen noch die Adjektive, die rekusiv definiert werden müssen wie: "die wunder wunder schöne Blume".
+% Zudem fehlen noch die Adjektive, die rekusiv definiert werden m≈∏ssen wie: "die wunder wunder sch≈°ne Blume".
 % Auch fehlt das Nachfeld, welches durch die Konjunktionen beginnt, wobei der folgende Nebensatz auch
 % auf seine Topologischen Felder analysiert werden sollte.
 %----------------------------------
